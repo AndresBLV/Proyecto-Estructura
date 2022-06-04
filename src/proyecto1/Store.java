@@ -11,11 +11,16 @@ package proyecto1;
  */
 public class Store {
     private String name;
-    private List products;
+    private List<Product> products;
     
-    public Store(String name, List products) {
+    public Store(String name, List<Product> products) {
         this.name = name;
         this.products = products;
+    }
+    
+    public Store(String name) {
+        this.name = name;
+        this.products = new List<Product>();
     }
 
     public String getName() {
@@ -30,7 +35,7 @@ public class Store {
         return products;
     }
 
-    public void setProducts(List products) {
+    public void setProducts(List<Product> products) {
         this.products = products;
     }
     

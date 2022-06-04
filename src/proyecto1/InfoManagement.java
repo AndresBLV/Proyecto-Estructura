@@ -135,9 +135,9 @@ public class InfoManagement {
                 for (int j = 0; j < products.getSize(); j++) {
                     Product product = temp.getData();
                     if (temp.getNext() != null) {
-                        stores_txt += product.getName() + "," + String.valueOf(product.getQuantity()) + "\n";
+                        stores_txt += product.getReference() + "," + String.valueOf(product.getQuantity()) + "\n";
                     } else {
-                        stores_txt += product.getName() + "," + String.valueOf(product.getQuantity()) + ";" + "\n";
+                        stores_txt += product.getReference() + "," + String.valueOf(product.getQuantity()) + ";" + "\n";
                     }
                     temp = temp.getNext();
                 }
@@ -150,7 +150,7 @@ public class InfoManagement {
             Node<Route> aux = routes.getFirst();
             for (int i = 0; i < routes.getSize(); i++) {
                 Route route = aux.getData();
-                routes_txt += route.getOrigin() + "," + route.getDestiny() + "," + route.getDistance() + "\n";
+                routes_txt += route.getOrigin() + "," + route.getDestiny() + "," + route.getWeight() + "\n";
                 aux = aux.getNext();
             }
         }

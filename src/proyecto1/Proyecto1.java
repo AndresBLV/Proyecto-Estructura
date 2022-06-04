@@ -17,18 +17,65 @@ public class Proyecto1 {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException {
+        GrafMatPeso gf = new GrafMatPeso(100);
         InfoManagement im = new InfoManagement();
         StoreManagement sm = new StoreManagement();
+        ProductManagement pm = new ProductManagement();
+        RouteManagement rm = new RouteManagement();
 
-        //infoM.loadData();
+//        1. Cargar archivo
         List[] info = im.readData();
-
+        
         List<Store> stores = info[0];
         List<Route> routes = info[1];
+        
+//        Construir la matriz de adyacencia de pesos
 
-        Product newProduct = new Product("Cianuro", 13);
+        gf.setMatFromLists(stores, routes);
+        
+        
+//        2. Actualizar repositorio
 
-        sm.NewProduct(stores, 0, newProduct);
+        im.setData(stores, routes);
+        
+//        6. Agrega un nuevo almacen
+
+//      Ejemplo
+
+        Store newStore = new Store("F"); 
+
+        sm.NewStore(gf, stores, newStore);
+        
+        Node<Store> node = stores.searchNode(newStore); //Nodo del nuevo almacen
+        
+//      Si el nuevo almacen es el origen
+        
+        rm.NewRoute(gf, routes, node, stores.getFirst(), 100); // Editar el stores.getFirst() por el nodo destino
+        
+//      Si el nuevo almacen es el destino
+        
+        rm.NewRoute(gf, routes, stores.getFirst(), node, 100); // Editar el stores.getFirst() por el nodo origen
+        
+        gf.print();
+        
+//        
+////        7. Agrega un nuevo camino
+//
+////      Ejemplo
+//
+//        rm.NewRoute(gf, routes, stores.getFirst(), stores.getLast(), 100);
+//
+////        8. Gestión de Stock de un Almacen
+//
+////      Ejemplo
+//
+//        Product newProduct = new Product("Cianuro", 13);
+//
+//        pm.NewProduct(stores, 0, newProduct);
+//        
+//        pm.IncreaseQuantity(stores, 0, 0, 20);
+//
+//        
 
         /**
          * Método que printea la lista Routes
@@ -54,7 +101,6 @@ public class Proyecto1 {
 //            System.out.println(S + " }");
 //
 //        }
-
         /**
          * Método que printea la lista Stores
          */

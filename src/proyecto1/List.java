@@ -38,7 +38,7 @@ public class List<T> {
      * @return el nodo requerido
      */
     public void append(T data) {
-        Node<T> temp = new Node<>(data);
+        Node<T> temp = new Node<T>(data);
 
         if (this.isEmpty()) {
             this.first = this.last = temp;
@@ -48,7 +48,7 @@ public class List<T> {
         }
         size++;
     }
-    
+
     /**
      * Método que busca dentro de la lista un nodo por el index
      *
@@ -57,13 +57,34 @@ public class List<T> {
     public Node<T> getNode(int index) {
         if (!this.isEmpty()) {
             Node<T> aux = this.first;
-            for (int i = 0; i < index ; i++) {
+            for (int i = 0; i < index; i++) {
                 aux = aux.getNext();
             }
             return aux;
         } else {
             return null;
         }
+    }
+
+    /**
+     * Método que busca dentro de la lista un nodo por la data
+     *
+     * @param data es la información que contiene el nodo
+     */
+    public Node<T> searchNode(T data) {
+        if (!this.isEmpty()) {
+            Node<T> aux = this.first;
+            
+            while (aux != null) {
+                if (aux.getData().equals(data)) {
+                    return aux;
+                }
+                
+                aux = aux.getNext();
+            }
+        }
+        return null;
+
     }
 
     public Node<T> getFirst() {

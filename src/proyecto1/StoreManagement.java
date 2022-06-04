@@ -10,23 +10,10 @@ package proyecto1;
  * @author dsre1
  */
 public class StoreManagement {
-    
-    public void NewProduct(List<Store> stores, int storeIndex, Product product) {
-        if (stores.getNode(storeIndex) != null) {
-            Store store = stores.getNode(storeIndex).getData();
-            List<Product> products = store.getProducts();
-            products.append(product);
-        }
-    }
 
-    public void IncreaseQuantity(List<Store> stores, int storeIndex, int productIndex, int newQuantity) {
-        if (stores.getNode(storeIndex) != null) {
-            Store store = stores.getNode(storeIndex).getData();
-            List<Product> products = store.getProducts();
-            if (products.getNode(productIndex) != null) {
-                Product product = products.getNode(productIndex).getData();
-                product.setQuantity(newQuantity);
-            }
-        }
+    public void NewStore(GrafMatPeso gf, List<Store> stores, Store store) {
+        stores.append(store);
+        Node<Store> node = stores.searchNode(store);
+        gf.insertNode(node);
     }
 }

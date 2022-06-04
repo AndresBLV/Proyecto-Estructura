@@ -12,12 +12,12 @@ package proyecto1;
 public class Route {
     private String origin;
     private String destiny;
-    private int distance;
+    private int weight;
 
-    public Route(String origin, String destiny, int distance) {
+    public Route(String origin, String destiny, int weight) {
         this.origin = origin;
         this.destiny = destiny;
-        this.distance = distance;
+        this.weight = weight;
     }
 
     public String getOrigin() {
@@ -36,11 +36,11 @@ public class Route {
         this.destiny = destiny;
     }
 
-    public int getDistance() {
-        return distance;
+    public int getWeight() {
+        return weight;
     }
 
-    public void setDistance(int distance) {
-        this.distance = distance;
+    public void setWeight(int weight) {
+        this.weight = weight;
     }
 }

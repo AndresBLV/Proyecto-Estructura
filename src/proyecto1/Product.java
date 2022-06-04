@@ -10,20 +10,20 @@ package proyecto1;
  * @author dsre1
  */
 public class Product {
-    private String name;
+    private String reference;
     private int quantity;
 
-    public Product(String name, int quantity) {
-        this.name = name;
+    public Product(String reference, int quantity) {
+        this.reference = reference;
         this.quantity = quantity;
     }
 
-    public String getName() {
-        return name;
+    public String getReference() {
+        return reference;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setReference(String reference) {
+        this.reference = reference;
     }
 
     public int getQuantity() {
