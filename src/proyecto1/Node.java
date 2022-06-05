@@ -15,6 +15,7 @@ public class Node<T> {
 
     private T data;
     private Node<T> next;
+    private boolean wasVisited;
     
     /**
      * Constructor de la clase Node
@@ -23,6 +24,7 @@ public class Node<T> {
     public Node(T data) {
         this.data = data;
         this.next = null;
+        this.wasVisited = false;
     }
 
     public T getData() {
@@ -43,5 +45,13 @@ public class Node<T> {
 
     public Color getColorPreferencia() {
         return Color.black;
+    }
+    
+    public void setWasVisited(boolean wasVisited){
+        this.wasVisited = wasVisited;
+    }
+    
+    public boolean getWasVisited(){
+        return wasVisited;
     }
 }
