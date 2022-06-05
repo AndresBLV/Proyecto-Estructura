@@ -63,7 +63,7 @@ public class CaminoMinimo {
     *Método que determina eñ camino más corto del grafo
     *@return retorna de distancia minima del recorrido
     */
-    private int minimo(){
+    public int minimo(){
         int mx = GrafMatPeso.INFINITO;
         int v = 1;
         for (int j = 1; j < n; j++){

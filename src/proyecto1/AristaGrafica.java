@@ -17,7 +17,7 @@ import java.awt.geom.Line2D;
  *
  * @author andre
  */
-public class AristaGrafico {
+public class AristaGrafica {
     private int peso;
     private VerticeGrafico origen;
     private VerticeGrafico destino;
