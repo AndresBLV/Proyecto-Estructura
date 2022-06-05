@@ -153,17 +153,22 @@ public class Interfaz extends javax.swing.JFrame {
             
             JOptionPane.showMessageDialog(null,"Es necesario guardar los datos actualmente cargados en memoria");
         } catch (IOException ex) {
-            System.out.println("Error al cargar el archivo");
+            JOptionPane.showMessageDialog(null,"Error al cargar el archivo");
         }
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        im.setData(stores, routes);
+//        im.setData(stores, routes);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        String name = JOptionPane.showInputDialog("Ingresa el nombre del alamcen:");
+        Store newStore = new Store(name); 
+
+        sm.NewStore(gf, stores, newStore);
         
+        Node<Store> node = stores.searchNode(newStore); //Nodo del nuevo almacen
     }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
