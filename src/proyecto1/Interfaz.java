@@ -5,16 +5,31 @@
  */
 package proyecto1;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author andre
  */
 public class Interfaz extends javax.swing.JFrame {
+    
+    public static GrafMatPeso gf;
+    public static InfoManagement im;
+    public static StoreManagement sm;
+    public static ProductManagement pm;
+    public static RouteManagement rm;
 
     /**
      * Creates new form Interfaz
      */
     public Interfaz() {
+        GrafMatPeso gf = new GrafMatPeso(100);
+        InfoManagement im = new InfoManagement();
+        StoreManagement sm = new StoreManagement();
+        ProductManagement pm = new ProductManagement();
+        RouteManagement rm = new RouteManagement();
         initComponents();
     }
 
@@ -47,6 +62,11 @@ public class Interfaz extends javax.swing.JFrame {
         });
 
         jButton2.setText("Actualizar repositorio");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Reporte de disponibolidad");
 
@@ -115,8 +135,25 @@ public class Interfaz extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+//        1. Cargar archivo
+        List[] info = null;
+        try {
+            info = im.readData();
+        } catch (IOException ex) {
+            System.out.println("Error al cargar el archivo");
+        }
+        
+        List<Store> stores = info[0];
+        List<Route> routes = info[1];
+        
+//        Construir la matriz de adyacencia de pesos
+
+        gf.setMatFromLists(stores, routes);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        im.setData(stores, routes);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
