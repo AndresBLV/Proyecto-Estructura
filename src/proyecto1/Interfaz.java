@@ -8,6 +8,7 @@ package proyecto1;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -73,6 +74,11 @@ public class Interfaz extends javax.swing.JFrame {
         jButton4.setText("Realizar Pedido");
 
         jButton5.setText("Agregar Almacen");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jButton6.setText("Agregar Camino");
 
@@ -139,21 +145,26 @@ public class Interfaz extends javax.swing.JFrame {
         List[] info = null;
         try {
             info = im.readData();
+            List<Store> stores = info[0];
+            List<Route> routes = info[1];
+            //        Construir la matriz de adyacencia de pesos
+
+            gf.setMatFromLists(stores, routes);
+            
+            JOptionPane.showMessageDialog(null,"Es necesario guardar los datos actualmente cargados en memoria");
         } catch (IOException ex) {
             System.out.println("Error al cargar el archivo");
         }
         
-        List<Store> stores = info[0];
-        List<Route> routes = info[1];
-        
-//        Construir la matriz de adyacencia de pesos
-
-        gf.setMatFromLists(stores, routes);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         im.setData(stores, routes);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
