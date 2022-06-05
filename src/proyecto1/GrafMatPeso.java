@@ -10,7 +10,7 @@ package proyecto1;
  * @author dsre1
  */
 public class GrafMatPeso {
-
+    public static int INFINITO = 0;
     private int[][] matWeight;
     private Node<Store>[] nodes;
     private int maxNods;
@@ -98,4 +98,15 @@ public class GrafMatPeso {
         
     }
 
+    public int [][] getMatPeso(){
+        return matWeight;
+    }
+    
+    public Node<Store>[] getNodes(){
+        return nodes;
+    }
+    
+    public int getNumNods(){
+        return numNods;
+    }
 }
