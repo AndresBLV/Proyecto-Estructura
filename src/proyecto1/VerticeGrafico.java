@@ -24,7 +24,7 @@ import javax.swing.JComponent;
  * @author andre
  */
 public class VerticeGrafico {
-  public static final double DIAMETRO = 40d;
+    public static final double DIAMETRO = 40d;
     private Node<Store> vertice;
     private Color color;
     private Color colorBorde;

@@ -24,7 +24,7 @@ public class AristaGrafico {
     AffineTransform tx = new AffineTransform();
     Polygon arrowHead = new Polygon();
     
-    public AristaGrafica(int peso, VerticeGrafico origen, VerticeGrafico destino){
+    public AristaGrafica(int peso, VerticeGrafico origen, VerticeGrafico destino) {
         this.peso = peso;
         this.origen = origen;
         this.destino = destino;

@@ -5,6 +5,8 @@
  */
 package proyecto1;
 
+import java.awt.Color;
+
 /**
  *
  * @author dsre1
@@ -39,4 +41,7 @@ public class Node<T> {
         this.next = pnext;
     }
 
+    public Color getColorPreferencia() {
+        return Color.black;
+    }
 }
