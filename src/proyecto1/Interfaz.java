@@ -242,7 +242,7 @@ public class Interfaz extends javax.swing.JFrame {
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         try{
             String name = JOptionPane.showInputDialog("Ingresa el nuevo producto:");
-            int cantidad = StringToInteger(JOptionPane.showInputDialog("Ingresa la cantidad del producto:"));
+            int cantidad = Integer.parseInt(JOptionPane.showInputDialog("Ingresa la cantidad del producto:"));
             Product newProduct = new Product(name, cantidad);
 
             pm.NewProduct(stores, 0, newProduct);
@@ -261,8 +261,10 @@ public class Interfaz extends javax.swing.JFrame {
         try{
             String name = JOptionPane.showInputDialog("Ingresa 1 para reccorrido dfS o 2 para recorrido bfs:");
             if (name == "1"){
+                JOptionPane.showMessageDialog(null, "Recorrido dfs");
                 gf.dfs();
             }else if (name == "2"){
+                JOptionPane.showMessageDialog(null, "Recorrido bfs");
                 gf.bfs();
             }else{
                 JOptionPane.showMessageDialog(null, "Introduzca valores validos");
