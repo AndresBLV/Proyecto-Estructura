@@ -5,8 +5,11 @@
  */
 package proyecto1;
 
+<<<<<<< Updated upstream
 import java.util.Arrays;
 
+=======
+>>>>>>> Stashed changes
 /**
  *
  * @author andre
@@ -63,7 +66,11 @@ public class CaminoMinimo {
     *Método que determina eñ camino más corto del grafo
     *@return retorna de distancia minima del recorrido
     */
+<<<<<<< Updated upstream
     public int minimo(){
+=======
+    private int minimo(){
+>>>>>>> Stashed changes
         int mx = GrafMatPeso.INFINITO;
         int v = 1;
         for (int j = 1; j < n; j++){
@@ -93,4 +100,9 @@ public class CaminoMinimo {
             System.out.print("V" + s);
         }
     }
+<<<<<<< Updated upstream
 }
+=======
+}  
+
+>>>>>>> Stashed changes
