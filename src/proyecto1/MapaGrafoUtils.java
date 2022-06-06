@@ -13,7 +13,7 @@ import java.util.Random;
  * @author andre
  */
 public class MapaGrafoUtils {
-   private MapaGrafoUtils() {}
+   public MapaGrafoUtils() {}
     
     public static MapaGrafo construirMapa(GrafMatPeso grafMatPeso) {
         Node<Store>[] vertices = grafMatPeso.getNodes();
