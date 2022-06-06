@@ -73,6 +73,11 @@ public class Interfaz extends javax.swing.JFrame {
         });
 
         jButton3.setText("Reporte de disponibolidad");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Realizar Pedido");
 
@@ -212,18 +217,35 @@ public class Interfaz extends javax.swing.JFrame {
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         try{
             String name = JOptionPane.showInputDialog("Ingresa el nuevo producto:");
-            String cantidad = JOptionPane.showInputDialog("Ingresa la cantidad del producto:");
-            Product newProduct = new Product(name, 13);
+            int cantidad = IntegerToString(JOptionPane.showInputDialog("Ingresa la cantidad del producto:"));
+            Product newProduct = new Product(name, cantidad);
 
             pm.NewProduct(stores, 0, newProduct);
         
             pm.IncreaseQuantity(stores, 0, 0, 20);
             
-        }catch(Exception e){
             JOptionPane.showMessageDialog(null,"Se agrego la nueva ruta");
+            
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Error al ingresar los datos");
         }
         
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        try{
+            String name = JOptionPane.showInputDialog("Ingresa 1 para reccorrido dfS o 2 para recorrido bfs:");
+            if (name == "1"){
+                gf.dfs();
+            }else if (name == "2"){
+                gf.bfs();
+            }else{
+                JOptionPane.showMessageDialog(null, "Introduzca valores validos");
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Se agrego la nueva ruta");
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
