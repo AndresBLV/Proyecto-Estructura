@@ -101,7 +101,7 @@ public class GrafMatPeso {
         
     }
     
-<<<<<<< Updated upstream
+
     public void displayVertex(int v){
         System.out.println(nodes[v].getData().getName());
     }
@@ -110,12 +110,6 @@ public class GrafMatPeso {
         return matWeight;
     }
     
-=======
-    public int [][] getMatPeso(){
-        return matWeight;
-    }
-        
->>>>>>> Stashed changes
     public Node<Store>[] getNodes(){
         return nodes;
     }
@@ -123,7 +117,7 @@ public class GrafMatPeso {
     public int getNumNods(){
         return numNods;
     }
-<<<<<<< Updated upstream
+
     
     public void dfs(){
 		 nodes [0] .setWasVisited(true); // Comienza desde el primer vértice y marca
@@ -152,7 +146,7 @@ public class GrafMatPeso {
 	}	//end getAdjUnvisitedVertex()
 
         public void bfs(){
-		nodes [0] .setWasVisited(true);
+		nodes [0].setWasVisited(true);
 		displayVertex(0);
 		theQueue.insert(0);
 		int v2;
@@ -160,14 +154,14 @@ public class GrafMatPeso {
 		while(!theQueue.isEmpty()){
 			int v1 = theQueue.remove();
 			while((v2 = getAdjUnvisitedVertex_bfs(v1))!=-1){
-				nodes [0] .setWasVisited(true);
+				nodes [0].setWasVisited(true);
 				displayVertex(v2);
 				theQueue.insert(v2);
 			}//end while
 		}//end while(queue ont empty)
 		
 		for(int j=0;j<this.numNods;j++)
-			nodes [0] .setWasVisited(false);
+			nodes [0].setWasVisited(false);
 	}//end bfs
 	
 	public int getAdjUnvisitedVertex_bfs(int v){
@@ -176,6 +170,5 @@ public class GrafMatPeso {
 				return j;
 		return -1;
 	}//end getAdjUnvisitedVertex()
-=======
->>>>>>> Stashed changes
+
 }

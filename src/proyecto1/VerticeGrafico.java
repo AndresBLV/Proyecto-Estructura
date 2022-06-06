@@ -4,10 +4,6 @@
  * and open the template in the editor.
  */
 package proyecto1;
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -22,10 +18,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.geom.Ellipse2D;
 import javax.swing.JComponent;
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
 /**
  *
  * @author andre
@@ -67,19 +60,17 @@ public class VerticeGrafico {
         g2.drawString(etiqueta, etiquetaX, etiquetaY);
     }
     
-<<<<<<< Updated upstream
+
     public Node<Store> getVertice() {
         return vertice;
     }
 
-    public void setVertice(Node<Store> vertice) {
-=======
     public Node<Store> getNode() {
         return vertice;
     }
 
     public void setNode(Node<Store> vertice) {
->>>>>>> Stashed changes
+
         this.vertice = vertice;
     }
 
@@ -101,9 +92,5 @@ public class VerticeGrafico {
 
     void setMarcado(boolean marcado) {
         this.marcado = marcado;
-<<<<<<< Updated upstream
-    }  
-=======
-    } 
->>>>>>> Stashed changes
+    }
 }

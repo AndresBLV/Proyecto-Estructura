@@ -46,7 +46,6 @@ public class Node<T> {
     public Color getColorPreferencia() {
         return Color.black;
     }
-<<<<<<< Updated upstream
     
     public void setWasVisited(boolean wasVisited){
         this.wasVisited = wasVisited;
@@ -55,6 +54,5 @@ public class Node<T> {
     public boolean getWasVisited(){
         return wasVisited;
     }
-=======
->>>>>>> Stashed changes
+
 }

@@ -33,6 +33,8 @@ public class Interfaz extends javax.swing.JFrame {
         StoreManagement sm = new StoreManagement();
         ProductManagement pm = new ProductManagement();
         RouteManagement rm = new RouteManagement();
+        List<Store> stores = new List();
+        List<Route> routes = new List();
         initComponents();
     }
 
@@ -231,8 +233,14 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        String name = JOptionPane.showInputDialog("Ingresa un nuevo camino:");
-//        Route newRoute = new Route(name); 
+        String origin = JOptionPane.showInputDialog("Ingresa un nuevo origen:");
+        String destiny = JOptionPane.showInputDialog("Ingresa un nuevo destino:");
+        int peso = Integer.parseInt(JOptionPane.showInputDialog("Ingresa un nuevo peso:"));
+
+
+        Route newRoute = new Route(origin,destiny,peso); 
+        
+        routes.append(newRoute);
         
         rm.NewRoute(gf, routes, stores.getFirst(), stores.getLast(), 100);
         
@@ -275,7 +283,7 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        
+        JOptionPane.showMessageDialog(null, "No se pudo");
     }//GEN-LAST:event_jButton4ActionPerformed
     
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
