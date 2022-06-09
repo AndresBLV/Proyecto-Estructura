@@ -426,6 +426,10 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        try {
+            im.setData(stores, routes);
+        } catch (FileNotFoundException ex) {
+        }
         this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton9ActionPerformed
 
