@@ -5,36 +5,38 @@
  */
 package proyecto1;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import java.util.Random;
 
 /**
  *
  * @author andre
  */
 public class Interfaz extends javax.swing.JFrame {
-    
+
     public static GrafMatPeso gf;
     public static InfoManagement im;
     public static StoreManagement sm;
     public static ProductManagement pm;
     public static RouteManagement rm;
-    public static  List<Store> stores;
-    public static  List<Route> routes;
+    public static List<Store> stores;
+    public static List<Route> routes;
 
     /**
      * Creates new form Interfaz
      */
-    public Interfaz() {
-        GrafMatPeso gf = new GrafMatPeso(100);
-        InfoManagement im = new InfoManagement();
-        StoreManagement sm = new StoreManagement();
-        ProductManagement pm = new ProductManagement();
-        RouteManagement rm = new RouteManagement();
-        List<Store> stores = new List();
-        List<Route> routes = new List();
+    public Interfaz(GrafMatPeso gf) {
+        this.gf = gf;
+        this.im = new InfoManagement();
+        this.sm = new StoreManagement();
+        this.pm = new ProductManagement();
+        this.rm = new RouteManagement();
+        this.stores = new List();
+        this.routes = new List();
         initComponents();
     }
 
@@ -78,7 +80,7 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Reporte de disponibolidad");
+        jButton3.setText("Reporte de disponibilidad");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -142,7 +144,7 @@ public class Interfaz extends javax.swing.JFrame {
                         .addGap(33, 33, 33)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -198,94 +200,231 @@ public class Interfaz extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-//        1. Cargar archivo
         List[] info = null;
         try {
-            info = im.readData();
-            List<Store> stores = info[0];
-            List<Route> routes = info[1];
-            //        Construir la matriz de adyacencia de pesos
+            String a = JOptionPane.showInputDialog("Ingresa 1 para cargar los datos del repositorio o 2 para cargar otro txt:");
+            if ("1".equals(a)) {
+                info = im.readData();
+                this.stores = info[0];
+                this.routes = info[1];
 
-            gf.setMatFromLists(stores, routes);
-            
-            JOptionPane.showMessageDialog(null,"Es necesario guardar los datos actualmente cargados en memoria");
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null,"Error al cargar el archivo");
+                gf.setMatFromLists(stores, routes);
+
+                JOptionPane.showMessageDialog(null, "Carga de datos realizada exitosamente");
+            } else if ("2".equals(a)) {
+                im.loadData();
+                info = im.readData();
+                this.stores = info[0];
+                this.routes = info[1];
+                
+                System.out.println(stores.getSize());
+
+                gf.setMatFromLists(stores, routes);
+
+                JOptionPane.showMessageDialog(null, "Carga de datos realizada exitosamente");
+                
+            } else {
+                JOptionPane.showMessageDialog(null, "Introduzca valores validos");
+            }
+
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error al cargar el archivo");
         }
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-//        im.setData(stores, routes);
+        try {
+            im.setData(stores, routes);
+            JOptionPane.showMessageDialog(null, "Set de datos realizada exitosamente");
+        } catch (FileNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, "Error en el set de datos");
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        String name = JOptionPane.showInputDialog("Ingresa el nombre del alamcen:");
-        Store newStore = new Store(name); 
 
-        sm.NewStore(gf, stores, newStore);
-        
-        Node<Store> node = stores.searchNode(newStore); //Nodo del nuevo almacen
-        
-        rm.NewRoute(gf, routes, node, stores.getFirst(), 100);
-        
-        JOptionPane.showInputDialog("Se agrego el nuevo almacen");
+        try {
+            Random rand = new Random();
+
+            int randomNode = rand.nextInt(stores.getSize());
+            int randomWeight = rand.nextInt(100);
+
+            String name = JOptionPane.showInputDialog("Ingresa el nombre del alamcen:");
+
+            Store newStore = new Store(name);
+
+            sm.NewStore(gf, stores, newStore);
+
+            Node<Store> node = stores.searchNode(newStore); //Nodo del nuevo almacen
+
+            rm.NewRoute(gf, routes, node, stores.getNode(randomNode), randomWeight);
+            rm.NewRoute(gf, routes, node, stores.getNode(randomNode), randomWeight);
+
+            JOptionPane.showMessageDialog(null, "Se agrego el nuevo almacen exitosamente");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al cargar almacen");
+        }
+
+
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        String origin = JOptionPane.showInputDialog("Ingresa un nuevo origen:");
-        String destiny = JOptionPane.showInputDialog("Ingresa un nuevo destino:");
-        int peso = Integer.parseInt(JOptionPane.showInputDialog("Ingresa un nuevo peso:"));
+        Node<Store> aux = null;
 
+        try {
+            String origin = JOptionPane.showInputDialog("Ingresa el almacen de origen:").toUpperCase();
 
-        Route newRoute = new Route(origin,destiny,peso); 
-        
-        routes.append(newRoute);
-        
-        rm.NewRoute(gf, routes, stores.getFirst(), stores.getLast(), 100);
-        
-        JOptionPane.showInputDialog("Se agrego la nueva ruta");
+            Node<Store> originNode = null;
+
+            aux = stores.getFirst();
+            while (aux != null) {
+                if (aux.getData().getName().equals(origin)) {
+                    originNode = aux;
+                    break;
+                }
+                aux = aux.getNext();
+            }
+
+            if (originNode == null) {
+                throw new Exception();
+            }
+
+            String destiny = JOptionPane.showInputDialog("Ingresa el almacen de destino:").toUpperCase();
+
+            Node<Store> destinyNode = null;
+
+            aux = stores.getFirst();
+            while (aux != null) {
+                if (aux.getData().getName().equals(destiny)) {
+                    destinyNode = aux;
+                    break;
+                }
+                aux = aux.getNext();
+            }
+
+            if (destinyNode == null) {
+                throw new Exception();
+            }
+
+            int peso = Integer.parseInt(JOptionPane.showInputDialog("Ingresa el peso:"));
+
+            rm.NewRoute(gf, routes, originNode, destinyNode, peso);
+
+            JOptionPane.showMessageDialog(null, "Se agrego la nueva ruta");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al agregar ruta");
+        }
+
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        try{
-            String name = JOptionPane.showInputDialog("Ingresa el nuevo producto:");
-            int cantidad = Integer.parseInt(JOptionPane.showInputDialog("Ingresa la cantidad del producto:"));
-            Product newProduct = new Product(name, cantidad);
+        int storeIndex = -1;
+        try {
+            String almacen = JOptionPane.showInputDialog("Ingresa el nombre del almacen:").toUpperCase();
 
-            pm.NewProduct(stores, 0, newProduct);
-        
-            pm.IncreaseQuantity(stores, 0, 0, 20);
-            
-            JOptionPane.showMessageDialog(null,"Se agrego la nueva ruta");
-            
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null,"Error al ingresar los datos");
+            Node<Store> almacenNode = null;
+
+            Node<Store> aux = stores.getFirst();
+            while (aux != null) {
+                if (aux.getData().getName().equals(almacen)) {
+                    almacenNode = aux;
+                    break;
+                }
+                aux = aux.getNext();
+            }
+
+            if (almacenNode == null) {
+                throw new Exception();
+            }
+
+            storeIndex = stores.indexNode(almacenNode.getData());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al ingresar los datos");
         }
-        
+
+        try {
+            String a = JOptionPane.showInputDialog("Ingresa 1 para agregar nuevo producto o 2 aumentar la cantidad de productos:");
+
+            if ("1".equals(a)) {
+                String name = JOptionPane.showInputDialog("Ingresa el nombre del nuevo producto:");
+                int cantidad = Integer.parseInt(JOptionPane.showInputDialog("Ingresa la cantidad del producto:"));
+
+                Product newProduct = new Product(name, cantidad);
+
+                pm.NewProduct(stores, storeIndex, newProduct);
+
+                JOptionPane.showMessageDialog(null, "Se agrego el nuevo producto");
+            } else if ("2".equals(a)) {
+                String producto = JOptionPane.showInputDialog("Ingresa el nombre del producto:").toLowerCase();
+
+                Node<Store> store = stores.getNode(storeIndex);
+
+                Node<Product> productNode = null;
+
+                Node<Product> aux = store.getData().getProducts().getFirst();
+                while (aux != null) {
+                    if (aux.getData().getReference().toLowerCase().equals(producto)) {
+                        productNode = aux;
+                        break;
+                    }
+                    aux = aux.getNext();
+                }
+
+                if (productNode == null) {
+                    throw new Exception();
+                }
+
+                int productIndex = store.getData().getProducts().indexNode(productNode.getData());
+
+                int cantidad = Integer.parseInt(JOptionPane.showInputDialog("Ingresa la cantidad a incrementar del producto:"));
+
+                pm.IncreaseQuantity(stores, storeIndex, productIndex, productNode.getData().getQuantity() + cantidad);
+
+                JOptionPane.showMessageDialog(null, "Se incrementó la cantidad del producto");
+            } else {
+                JOptionPane.showMessageDialog(null, "Introduzca valores validos");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al ingresar los datos");
+        }
+
+
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        try{
-            String name = JOptionPane.showInputDialog("Ingresa 1 para reccorrido dfS o 2 para recorrido bfs:");
-            if (name == "1"){
-                JOptionPane.showMessageDialog(null, "Recorrido dfs");
-                gf.dfs();
-            }else if (name == "2"){
-                JOptionPane.showMessageDialog(null, "Recorrido bfs");
-                gf.bfs();
-            }else{
-                JOptionPane.showMessageDialog(null, "Introduzca valores validos");
-            }
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null,"Se agrego la nueva ruta");
+        String name = JOptionPane.showInputDialog("Ingresa 1 para reccorrido dfS o 2 para recorrido bfs:");
+        if ("1".equals(name)) {
+            JOptionPane.showMessageDialog(null, "Recorrido dfs");
+            gf.dfs();
+        } else if ("2".equals(name)) {
+            JOptionPane.showMessageDialog(null, "Recorrido bfs");
+            gf.bfs();
+        } else {
+            JOptionPane.showMessageDialog(null, "Introduzca valores validos");
         }
+
+//try {
+//            String name = JOptionPane.showInputDialog("Ingresa 1 para reccorrido dfS o 2 para recorrido bfs:");
+//            System.out.print(name.getClass().getName());
+//            if ("1".equals(name)) {
+//                JOptionPane.showMessageDialog(null, "Recorrido dfs");
+//                gf.dfs();
+//            } else if ("2".equals(name)) {
+//                JOptionPane.showMessageDialog(null, "Recorrido bfs");
+//                gf.bfs();
+//            } else {
+//                JOptionPane.showMessageDialog(null, "Introduzca valores validos");
+//            }
+//        } catch (Exception e) {
+//            JOptionPane.showMessageDialog(null, "Error al recorrer el reporte");
+//        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         JOptionPane.showMessageDialog(null, "No se pudo");
     }//GEN-LAST:event_jButton4ActionPerformed
-    
+
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton9ActionPerformed
@@ -293,42 +432,43 @@ public class Interfaz extends javax.swing.JFrame {
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         MapaGrafoUtils mapa = new MapaGrafoUtils();
         MapaGrafo mapaGrafo = mapa.construirMapa(gf);
+        mapaGrafo.setVisible(true);
     }//GEN-LAST:event_jButton8ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Interfaz().setVisible(true);
-            }
-        });
-    }
+//    /**
+//     * @param args the command line arguments
+//     */
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(Interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(Interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(Interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(Interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new Interfaz().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

@@ -10,9 +10,16 @@ package proyecto1;
  * @author andre
  */
 public class Aplicacion {
-    private static GrafMatPeso grafo;
+    private static GrafMatPeso gf;
+    
+    public static void main(String[] args) {
+        gf = new GrafMatPeso(100);
+        
+        Interfaz interfaz = new Interfaz(gf);
+        interfaz.setVisible(true);
+    }
     
     public static GrafMatPeso getGrafo() {
-        return grafo;
+        return gf;
     }
 }

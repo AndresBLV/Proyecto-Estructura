@@ -124,6 +124,8 @@ public class InfoManagement {
      * Método que escribe el File (data) en el data.txt
      */
     public void setData(List<Store> stores, List<Route> routes) throws FileNotFoundException {
+        setData(new File("test\\samancito.txt"));
+        
         String stores_txt = "";
         if (!stores.isEmpty()) {
             Node<Store> aux = stores.getFirst();

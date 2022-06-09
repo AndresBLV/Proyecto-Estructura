@@ -86,6 +86,24 @@ public class List<T> {
         return null;
 
     }
+    
+    public int indexNode(T data) {
+        if (!this.isEmpty()) {
+            int index = 0;
+            Node<T> aux = this.first;
+            
+            while (aux != null) {
+                if (aux.getData().equals(data)) {
+                    return index;
+                }
+                index++;
+                aux = aux.getNext();
+            }
+        }
+        return -1;
+
+    }
+    
 
     public Node<T> getFirst() {
         return first;
