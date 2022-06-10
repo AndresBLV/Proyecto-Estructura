@@ -478,7 +478,7 @@ public class Interfaz extends javax.swing.JFrame {
 
             int resto = productNode.getData().getQuantity() - cantidad;
 
-            if (resto > 0){
+            if (resto >= 0){
               pm.IncreaseQuantity(stores, storeIndex, productIndex, productNode.getData().getQuantity() - cantidad);
 
             JOptionPane.showMessageDialog(null, "Se reliazo la compra del producto");
