@@ -424,7 +424,7 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        JOptionPane.showMessageDialog(null,"Disponibilidad")
+        JOptionPane.showMessageDialog(null,"Disponibilidad");
         gf.printAlmacen();
         int storeIndex = -1;
         try {
