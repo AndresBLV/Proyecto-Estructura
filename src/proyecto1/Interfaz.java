@@ -483,11 +483,9 @@ public class Interfaz extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(null, "Se reliazo la compra del producto");
             }else{
-              JOptionPane.showMessageDialog(null,"Se tiene que buscar un nuevo almacen para completar la compra;
-                pm.IncreaseQuantity(stores, storeIndex, productIndex,0
+              JOptionPane.showMessageDialog(null,"Se tiene que buscar un nuevo almacen para completar la compra");
+                pm.IncreaseQuantity(stores, storeIndex, productIndex,0);
                 JOptionPane.showMessageDialog(null,"Busqueda del almacen mas cercano usando algoritmo de Dijkstra");   
-              Disjktra camino = new Disjktra();
-              camino.resuelve(0);
             }
             
         }catch (Exception e) {
