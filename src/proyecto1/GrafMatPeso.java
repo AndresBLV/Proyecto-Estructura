@@ -5,6 +5,8 @@
  */
 package proyecto1;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author dsre1
@@ -88,10 +90,19 @@ public class GrafMatPeso {
         return -1;
     }
 
+    public void printAlmacen(){
+        for (int i = 0; i < numNods; i++) {
+            JOptionPane.showMessageDialog(null,"Almacen: "+ nodes[i].getData().getName());
+            for (int j = 0; j < nodes[i].getData().getProducts().getSize(); j++) {
+                JOptionPane.showMessageDialog(null,"Producto " + (j+1) + "\n" +nodes[i].getData().getProducts().getNode(j).getData()+"\n"+"Cantidad:"+nodes[i].getData().getProducts().getNode(j).getData());
+            }
+        }
+    }
+    
     public void print() {
         for (int i = 0; i < numNods; i++) {
             for (int j = 0; j < numNods; j++) {
-                System.out.println(matWeight[i][j]);
+                 JOptionPane.showMessageDialog(null,matWeight[i][j]);
             }
         }
 
