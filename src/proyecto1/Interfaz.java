@@ -397,9 +397,11 @@ public class Interfaz extends javax.swing.JFrame {
         if ("1".equals(name)) {
             JOptionPane.showMessageDialog(null, "Recorrido dfs");
             gf.dfs();
+            gf.printAlmacen();
         } else if ("2".equals(name)) {
             JOptionPane.showMessageDialog(null, "Recorrido bfs");
             gf.bfs();
+            gf.printAlmacen();                      
         } else {
             JOptionPane.showMessageDialog(null, "Introduzca valores validos");
         }
@@ -422,6 +424,7 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        JOptionPane.showMessageDialog(null,"Disponibilidad")
         gf.printAlmacen();
         int storeIndex = -1;
         try {
