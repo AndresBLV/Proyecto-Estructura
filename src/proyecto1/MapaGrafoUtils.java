@@ -5,9 +5,8 @@
  */
 package proyecto1;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import org.graphstream.graph.Graph;
+import org.graphstream.graph.implementations.SingleGraph;
 /**
  *
  * @author andre
@@ -15,35 +14,36 @@ import java.util.Random;
 public class MapaGrafoUtils {
    public MapaGrafoUtils() {}
     
-    public static MapaGrafo construirMapa(GrafMatPeso grafMatPeso) {
-        Node<Store>[] vertices = grafMatPeso.getNodes();
+    public  void construirMapa(GrafMatPeso grafMatPeso, List<Route> routes) {
+        System.setProperty("org.graphstream.ui", "swing");
+
+        Graph graph = new SingleGraph("Tutorial 1");
+
+        graph.setStrict(false);
+        graph.setAutoCreate(true);
+        
+        Node<Store>[] nodos = grafMatPeso.getNodes();
         int[][] pesos = grafMatPeso.getMatPeso();
-        List<VerticeGrafico> verticesGraficos = new ArrayList<>(vertices.length);
-        List<AristaGrafica> aristasGraficas = new ArrayList<>(vertices.length * vertices.length);
-        Random random = new Random();
-        // Primero llenamos la lista de vertices graficos
-        for (int v = 0; v < grafMatPeso.getNumNods(); v++) {
-            Node<Store> vertice = vertices[v];
-            int x = random.nextInt(700);
-            int y = random.nextInt(500);
-            VerticeGrafico vGrafico = new VerticeGrafico(x, y, vertice, vertice.getColorPreferencia());
-            verticesGraficos.add(vGrafico);
-        }
         
-        // llenamos lista de aristas graficas
-        // iteramos luego de llenar la lista de vertices y no durante, 
-        // para asegurar que existan todas las referencias de los objetos de VerticeGrafico
         for (int i = 0; i < grafMatPeso.getNumNods(); i++) {
-            for (int j = 0; j < grafMatPeso.getNumNods(); j++) {
-                VerticeGrafico origen = verticesGraficos.get(i);
-                VerticeGrafico destino = verticesGraficos.get(j);
-                int peso = pesos[i][j];
-                if (peso != GrafMatPeso.INFINITO) {
-                    aristasGraficas.add(new AristaGrafica(peso, origen, destino));
-                }
-            }
+            Node<Store> nodo = nodos[i];
+            String name = nodo.getData().getName();
+            graph.addNode(name);
+            graph.getNode(name).setAttribute("ui.label", "      " + name);
         }
         
-        return new MapaGrafo(verticesGraficos, aristasGraficas);
+        for (int i = 0; i < routes.getSize(); i++) {
+            Node<Route> route = routes.getNode(i);
+            String origin = nodos[grafMatPeso.numNode(route.getData().getOrigin())].getData().getName();
+                String destiny = nodos[grafMatPeso.numNode(route.getData().getDestiny())].getData().getName();
+                
+            graph.addEdge(origin+destiny, origin, destiny, true);    
+            graph.getEdge(origin+destiny).setAttribute("ui.label", "      " + route.getData().getWeight());
+            
+        }
+        
+        
+        
+        graph.display();
     } 
 }

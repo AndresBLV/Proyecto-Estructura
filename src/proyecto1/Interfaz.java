@@ -11,6 +11,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import java.util.Random;
+import org.graphstream.graph.*;
+import org.graphstream.graph.implementations.*;
 
 /**
  *
@@ -216,13 +218,13 @@ public class Interfaz extends javax.swing.JFrame {
                 info = im.readData();
                 this.stores = info[0];
                 this.routes = info[1];
-                
+
                 System.out.println(stores.getSize());
 
                 gf.setMatFromLists(stores, routes);
 
                 JOptionPane.showMessageDialog(null, "Carga de datos realizada exitosamente");
-                
+
             } else {
                 JOptionPane.showMessageDialog(null, "Introduzca valores validos");
             }
@@ -424,7 +426,7 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        JOptionPane.showMessageDialog(null,"Disponibilidad")
+        JOptionPane.showMessageDialog(null,"Disponibilidad");
         gf.printAlmacen();
         int storeIndex = -1;
         try {
@@ -495,53 +497,18 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        try {
-            im.setData(stores, routes);
-        } catch (FileNotFoundException ex) {
-        }
-        this.dispose();        // TODO add your handling code here:
+//        try {
+//            im.setData(stores, routes);
+//        } catch (FileNotFoundException ex) {
+//        }
+//        this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         MapaGrafoUtils mapa = new MapaGrafoUtils();
-        MapaGrafo mapaGrafo = mapa.construirMapa(gf);
-        mapaGrafo.setVisible(true);
+        mapa.construirMapa(gf, routes);
     }//GEN-LAST:event_jButton8ActionPerformed
 
-//    /**
-//     * @param args the command line arguments
-//     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(Interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(Interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(Interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(Interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new Interfaz().setVisible(true);
-//            }
-//        });
-//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
