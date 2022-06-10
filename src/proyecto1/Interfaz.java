@@ -344,7 +344,7 @@ public class Interfaz extends javax.swing.JFrame {
         }
 
         try {
-            String a = JOptionPane.showInputDialog("Ingresa 1 para agregar nuevo producto o 2 aumentar la cantidad de productos:");
+            String a = JOptionPane.showInputDialog("Ingresa 1 para agregar nuevo producto"+ "\n"+"Ingresa 2 para aumentar la cantidad de productos:");
 
             if ("1".equals(a)) {
                 String name = JOptionPane.showInputDialog("Ingresa el nombre del nuevo producto:");
@@ -474,9 +474,19 @@ public class Interfaz extends javax.swing.JFrame {
 
             int cantidad = Integer.parseInt(JOptionPane.showInputDialog("Ingresa la cantidad a comprar del producto:"));
 
-            pm.IncreaseQuantity(stores, storeIndex, productIndex, productNode.getData().getQuantity() - cantidad);
+            int resto = productNode.getData().getQuantity() - cantidad;
+
+            if (resto > 0){
+              pm.IncreaseQuantity(stores, storeIndex, productIndex, productNode.getData().getQuantity() - cantidad);
 
             JOptionPane.showMessageDialog(null, "Se reliazo la compra del producto");
+            }else{
+              JOptionPane.showMessageDialog(null,"Se tiene que buscar un nuevo almacen para completar la compra;
+                pm.IncreaseQuantity(stores, storeIndex, productIndex,0
+                JOptionPane.showMessageDialog(null,"Busqueda del almacen mas cercano usando algoritmo de Dijkstra");   
+              Disjktra camino = new Disjktra();
+              camino.resuelve(0);
+            }
             
         }catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al ingresar los datos");
