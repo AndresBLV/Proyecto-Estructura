@@ -94,7 +94,7 @@ public class GrafMatPeso {
         for (int i = 0; i < numNods; i++) {
             JOptionPane.showMessageDialog(null,"Almacen: "+ nodes[i].getData().getName());
             for (int j = 0; j < nodes[i].getData().getProducts().getSize(); j++) {
-                JOptionPane.showMessageDialog(null,"Producto " + (j+1) + "\n" +nodes[i].getData().getProducts().getNode(j).getData()+"\n"+"Cantidad:"+nodes[i].getData().getProducts().getNode(j).getData());
+                JOptionPane.showMessageDialog(null,"Producto " + (j+1) + "\n" +((Product) nodes[i].getData().getProducts().getNode(j).getData()).getReference()+"\n"+"Cantidad:"+((Product) nodes[i].getData().getProducts().getNode(j).getData()).getQuantity());
             }
         }
     }
