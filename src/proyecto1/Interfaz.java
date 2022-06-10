@@ -423,6 +423,62 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         gf.printAlmacen();
+        int storeIndex = -1;
+        try {
+            String almacen = JOptionPane.showInputDialog("Ingresa el nombre del almacen:").toUpperCase();
+
+            Node<Store> almacenNode = null;
+
+            Node<Store> aux = stores.getFirst();
+            while (aux != null) {
+                if (aux.getData().getName().equals(almacen)) {
+                    almacenNode = aux;
+                    break;
+                }
+                aux = aux.getNext();
+            }
+
+            if (almacenNode == null) {
+                throw new Exception();
+            }
+
+            storeIndex = stores.indexNode(almacenNode.getData());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al ingresar los datos");
+        }
+        
+        try {
+            String producto = JOptionPane.showInputDialog("Ingresa el nombre del producto:").toLowerCase();
+
+            Node<Store> store = stores.getNode(storeIndex);
+
+            Node<Product> productNode = null;
+
+            Node<Product> aux = store.getData().getProducts().getFirst();
+            while (aux != null) {
+                if (aux.getData().getReference().toLowerCase().equals(producto)) {
+                    productNode = aux;
+                    break;
+                }
+                aux = aux.getNext();
+            }
+
+            if (productNode == null) {
+                throw new Exception();
+            }
+
+            int productIndex = store.getData().getProducts().indexNode(productNode.getData());
+
+            int cantidad = Integer.parseInt(JOptionPane.showInputDialog("Ingresa la cantidad a comprar del producto:"));
+
+            pm.IncreaseQuantity(stores, storeIndex, productIndex, productNode.getData().getQuantity() - cantidad);
+
+            JOptionPane.showMessageDialog(null, "Se reliazo la compra del producto");
+            
+        }catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al ingresar los datos");
+        }
+       
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
